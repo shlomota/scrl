@@ -5,6 +5,7 @@ from transformers_interpret import SequenceClassificationExplainer
 import torch
 import pandas as pd
 import re
+from preprocess_style import clean
 
 def clean_text(text, do_re=True):
   if do_re:
@@ -73,6 +74,7 @@ st.markdown("""
 label = "Enter a passage from Rabbinic literature:"
 text = st.text_area(label, value=default_text)
 
+text = clean(text)
 text = clean_text(text)
 
 
