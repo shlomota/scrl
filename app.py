@@ -4,7 +4,18 @@ import streamlit as st
 from transformers_interpret import SequenceClassificationExplainer
 import torch
 import pandas as pd
+import re
 
+def clean_text(text, do_re=True):
+  if do_re:
+    text = re.sub("\w+,\w+", "", text)
+  text = text.replace(" \"", " ").replace("\" ", " ")
+  # text = text.replace(" \'", " ").replace("\' ", " ")
+  result = text.replace(",", "")
+  result = result.replace(".", "")
+  return result
+  
+  
 def clean_html(result):
         result = result.replace("[CLS]", "").replace("[SEP]", "")
         result = result.replace("100%", "1000px")
@@ -59,6 +70,8 @@ st.markdown("""
 #label = "Enter a verse here (no punctuation or vowels):"
 label = "Enter a passage from Rabbinic literature:"
 text = st.text_area(label, value=default_text)
+
+text = clean_text(text)
 
 
 
