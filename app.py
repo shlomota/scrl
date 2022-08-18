@@ -13,6 +13,8 @@ def clean_text(text, do_re=True):
   # text = text.replace(" \'", " ").replace("\' ", " ")
   result = text.replace(",", "")
   result = result.replace(".", "")
+  result = result.replace("?", "")
+  result = result.replace("!", "")
   return result
   
   
